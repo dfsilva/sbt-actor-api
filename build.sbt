@@ -6,7 +6,7 @@ organization := "im.actor"
 
 name := "sbt-actor-api"
 
-version := "0.7.18"
+version := "0.7.20-SNAPSHOT"
 
 scalaVersion := "2.10.6"
 
@@ -18,7 +18,7 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "com.eed3si9n" %% "treehugger" % "0.4.1",
-  "com.google.protobuf" % "protobuf-java" % "3.0.0-alpha-3",
+  "com.google.protobuf" % "protobuf-java" % "3.1.0",
   "io.spray" %% "spray-json" % "1.3.1",
   "org.specs2" %% "specs2-core" % "2.4.15" % "test"
 )
