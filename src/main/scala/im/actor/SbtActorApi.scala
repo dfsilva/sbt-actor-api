@@ -15,6 +15,12 @@ object SbtActorApi extends AutoPlugin {
 
   lazy val actorapiMain = SettingKey[String]("actorapi-main", "ActorApi main class.")
 
+  object autoImport {
+    val jsonFile = settingKey[String]("ActorApi Json File.")
+  }
+
+  import autoImport._
+
   lazy val settings: Seq[Setting[_]] = Seq(
     sourceDirectory in ActorApi <<= (sourceDirectory in Compile),
     path <<= sourceDirectory in ActorApi,

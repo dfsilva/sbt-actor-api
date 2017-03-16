@@ -6,7 +6,7 @@ organization := "im.actor"
 
 name := "sbt-actor-api"
 
-version := "0.7.20-SNAPSHOT"
+version := "0.7.26-SNAPSHOT"
 
 scalaVersion := "2.10.6"
 
@@ -32,12 +32,14 @@ ScalariformKeys.preferences :=
     .setPreference(AlignSingleLineCaseStatements, true)
 
 publishTo := {
-  val nexus = "https://oss.sonatype.org/"
+  val nexus = "http://nexus.diegosilva.com.br:8081/nexus/"
   if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    Some("releases" at nexus + "content/repositories/releases")
 }
+
+credentials += Credentials("Sonatype Nexus Repository Manager", "nexus.diegosilva.com.br", "admin", "admin123")
 
 pomExtra := (
   <url>http://github.com/actorapp/sbt-actor-api</url>
