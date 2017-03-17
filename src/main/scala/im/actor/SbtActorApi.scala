@@ -34,7 +34,8 @@ object SbtActorApi extends AutoPlugin {
       sourceManaged in ActorApi,
       managedClasspath in ActorApi,
       javaHome,
-      streams
+      streams,
+      jsonFile in ActorApi
     ).map(generate),
 
     actorapiClean <<= (
@@ -61,7 +62,7 @@ object SbtActorApi extends AutoPlugin {
     Seq(targetDir)
   }
 
-  private def generate(srcDir: File, targetDir: File, classpath: Classpath, javaHome: Option[File], streams: TaskStreams): Seq[File] = {
+  private def generate(srcDir: File, targetDir: File, classpath: Classpath, javaHome: Option[File], streams: TaskStreams, jsonFile: String): Seq[File] = {
     val log = streams.log
 
     log.info(f"Generating actor schema for $srcDir%s")
@@ -80,7 +81,7 @@ object SbtActorApi extends AutoPlugin {
             if (!output.exists())
               IO.createDirectory(output)
 
-            val src = input / "actor.json"
+            val src = input / jsonFile
             if (src.exists()) {
               val sources = (new Json2Tree(IO.read(src))).convert()
 
