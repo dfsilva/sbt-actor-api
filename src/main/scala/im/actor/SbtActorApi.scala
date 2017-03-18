@@ -15,12 +15,6 @@ object SbtActorApi extends AutoPlugin {
 
   lazy val actorapiMain = SettingKey[String]("actorapi-main", "ActorApi main class.")
 
-  object autoImport {
-    val jsonFile = settingKey[String]("ActorApi Json File.")
-  }
-
-  import autoImport._
-
   lazy val settings: Seq[Setting[_]] = Seq(
     sourceDirectory in ActorApi <<= (sourceDirectory in Compile),
     path <<= sourceDirectory in ActorApi,
@@ -34,8 +28,7 @@ object SbtActorApi extends AutoPlugin {
       sourceManaged in ActorApi,
       managedClasspath in ActorApi,
       javaHome,
-      streams,
-      jsonFile in ActorApi
+      streams
     ).map(generate),
 
     actorapiClean <<= (
@@ -62,7 +55,7 @@ object SbtActorApi extends AutoPlugin {
     Seq(targetDir)
   }
 
-  private def generate(srcDir: File, targetDir: File, classpath: Classpath, javaHome: Option[File], streams: TaskStreams, jsonFile: String): Seq[File] = {
+  private def generate(srcDir: File, targetDir: File, classpath: Classpath, javaHome: Option[File], streams: TaskStreams): Seq[File] = {
     val log = streams.log
 
     log.info(f"Generating actor schema for $srcDir%s")
@@ -81,7 +74,7 @@ object SbtActorApi extends AutoPlugin {
             if (!output.exists())
               IO.createDirectory(output)
 
-            val src = input / jsonFile
+            val src = input / "actor.json"
             if (src.exists()) {
               val sources = (new Json2Tree(IO.read(src))).convert()
 

@@ -145,11 +145,11 @@ final class Json2Tree(jsonString: String)
 
   private def withImports(name: String, imports: Vector[String], trees: Vector[Tree]): Tree = {
     if (name == "Base") {
-      PACKAGEHEADER("im.actor.api.rpc").mkTree(
+      PACKAGEHEADER("br.com.diegosilva.lotericas.rpc").mkTree(
         ((imports map (IMPORT(_): Tree)) ++ trees).toList
       )
     } else {
-      PACKAGE("im.actor.api.rpc") := BLOCK(
+      PACKAGE("br.com.diegosilva.lotericas.rpc") := BLOCK(
         (imports map (IMPORT(_))) ++ trees
       )
     }
