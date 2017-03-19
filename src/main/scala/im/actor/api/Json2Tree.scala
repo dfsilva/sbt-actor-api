@@ -64,7 +64,7 @@ final class Json2Tree(jsonString: String)
 
     val (globalRefsV, packageTrees) = refsTreesSeq.unzip
 
-    val globalRefsTree: Tree = OBJECTDEF("Refs") withFlags PRIVATEWITHIN("rpc") := BLOCK(globalRefsV.flatten)
+    val globalRefsTree: Tree = OBJECTDEF("Refs") withFlags PRIVATEWITHIN("api") := BLOCK(globalRefsV.flatten)
 
     val bserializableDef: Tree = TRAITDEF("BSerializable") withParents valueCache("java.io.Serializable") := BLOCK(
       DEF("toByteArray", arrayType(ByteClass)),
@@ -146,11 +146,11 @@ final class Json2Tree(jsonString: String)
 
   private def withImports(name: String, imports: Vector[String], trees: Vector[Tree]): Tree = {
     if (name == "Base") {
-      PACKAGEHEADER("br.com.diegosilva.lotericas.rpc").mkTree(
+      PACKAGEHEADER("br.com.diegosilva.lotericas.api.rpc").mkTree(
         ((imports map (IMPORT(_): Tree)) ++ trees).toList
       )
     } else {
-      PACKAGE("br.com.diegosilva.lotericas.rpc") := BLOCK(
+      PACKAGE("br.com.diegosilva.lotericas.api.rpc") := BLOCK(
         (imports map (IMPORT(_))) ++ trees
       )
     }
