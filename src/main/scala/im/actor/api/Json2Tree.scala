@@ -64,7 +64,7 @@ final class Json2Tree(jsonString: String)
 
     val (globalRefsV, packageTrees) = refsTreesSeq.unzip
 
-    val globalRefsTree: Tree = OBJECTDEF("Refs") withFlags PRIVATEWITHIN("api") := BLOCK(globalRefsV.flatten)
+    val globalRefsTree: Tree = OBJECTDEF("Refs") withFlags PRIVATEWITHIN("rpc") := BLOCK(globalRefsV.flatten)
 
     val bserializableDef: Tree = TRAITDEF("BSerializable") withParents valueCache("java.io.Serializable") := BLOCK(
       DEF("toByteArray", arrayType(ByteClass)),
