@@ -105,7 +105,7 @@ final class Json2Tree(jsonString: String)
     )
 
     val baseTrees: Vector[Tree] = Vector(
-      globalRefsTree,
+      globalRefsTree /*,
       parseExceptionDef,
       bserializableDef,
       containsHeaderDef,
@@ -119,8 +119,8 @@ final class Json2Tree(jsonString: String)
       rpcRequestDef,
       rpcResponseDef,
       requestDef,
-      requestObjDef
-    ) ++ baseServiceTrees ++ Seq(stringHelpersTree, debugTree)
+      requestObjDef*/
+    ) /*++ baseServiceTrees */ ++ Seq( /*stringHelpersTree, */ debugTree)
 
     (
       (packageTrees map {
@@ -136,7 +136,8 @@ final class Json2Tree(jsonString: String)
               Vector(
                 "scala.concurrent._",
                 "cats.data.Xor",
-                "com.google.protobuf.{ CodedInputStream, CodedOutputStream, ByteString }"
+                "com.google.protobuf.{ CodedInputStream, CodedOutputStream, ByteString }",
+                "im.actor.api.rpc.{ClientData, ContainsHeader, RpcError, RpcOk, RpcRequest, RpcResponse, Service}"
               ), trees
             ))))
         }

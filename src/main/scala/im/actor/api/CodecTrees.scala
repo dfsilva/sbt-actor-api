@@ -39,7 +39,7 @@ private[api] trait CodecTrees extends TreeHelpers {
         IMPORT("scodec.bits._"),
         IMPORT("scodec._"),
         IMPORT("scodec.codecs._"),
-
+        IMPORT("im.actor.api.rpc._"),
         DEF("protoPayload[A]") withParams PARAM("payloadCodec", valueCache("Codec[A]")) :=
           NEW(REF("PayloadCodec[A]")) APPLY REF("payloadCodec")
       ) ++ requestCodecTrees(requests)
