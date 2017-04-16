@@ -120,7 +120,7 @@ final class Json2Tree(jsonString: String)
       rpcResponseDef,
       requestDef,
       requestObjDef*/
-    ) /*++ baseServiceTrees */ ++ Seq( /*stringHelpersTree, */ debugTree)
+    ) /*++ baseServiceTrees */ ++ Seq(stringHelpersTree, debugTree)
 
     (
       (packageTrees map {
