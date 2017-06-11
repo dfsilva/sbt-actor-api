@@ -2,7 +2,9 @@ package im.actor
 
 import im.actor.api._
 import java.io.File
-import sbt._, Keys._
+
+import sbt._
+import Keys._
 
 object SbtActorApi extends AutoPlugin {
   val ActorApi = config("actorapi").hide
@@ -15,29 +17,38 @@ object SbtActorApi extends AutoPlugin {
 
   lazy val actorapiMain = SettingKey[String]("actorapi-main", "ActorApi main class.")
 
-    lazy val settings: Seq[Setting[_]] = Seq(
-      sourceDirectory in ActorApi <<= (sourceDirectory in Compile),
-      path <<= sourceDirectory in ActorApi,
-      managedClasspath in ActorApi <<= (classpathTypes, update) map { (ct, report) ⇒
-        Classpaths.managedJars(ActorApi, ct, report)
-      },
-      outputPath <<= sourceManaged in ActorApi,
+  lazy val settings: Seq[Setting[_]] = Seq(
+    sourceDirectory in ActorApi := (sourceDirectory in Compile).value,
+    path := (sourceDirectory in ActorApi).value,
 
-      actorapi <<= (
-        sourceDirectory in ActorApi,
-        sourceManaged in ActorApi,
-        managedClasspath in ActorApi,
-        javaHome,
-        streams
-      ).map(generate),
+    //    managedClasspath in ActorApi := ((classpathTypes, update) map { (ct, report) ⇒
+    //      Classpaths.managedJars(ActorApi, ct, report)
+    //    }).value,
 
-      actorapiClean <<= (
-        sourceManaged in ActorApi,
-        streams
-      ).map(clean),
+    managedClasspath in ActorApi := Classpaths.managedJars(ActorApi, classpathTypes.value, update.value),
 
-      sourceGenerators in Compile <+= actorapi
-    )
+    outputPath := (sourceManaged in ActorApi).value,
+
+    //    actorapi := (
+    //      sourceDirectory in ActorApi,
+    //      sourceManaged in ActorApi,
+    //      managedClasspath in ActorApi,
+    //      javaHome,
+    //      streams
+    //    ).map(generate).value,
+
+    actorapi := generate((sourceDirectory in ActorApi).value, (sourceManaged in ActorApi).value,
+      (managedClasspath in ActorApi).value, javaHome.value, streams.value),
+
+    //    actorapiClean := (
+    //      sourceManaged in ActorApi,
+    //      streams
+    //    ).map(clean).value,
+
+    actorapiClean := clean((sourceManaged in ActorApi).value, streams.value),
+
+    sourceGenerators in Compile += actorapi
+  )
 
   private def compiledFileDir(targetDir: File): File =
     targetDir / "main" / "scala"
@@ -91,9 +102,11 @@ object SbtActorApi extends AutoPlugin {
             }
 
             (output ** ("*.scala")).get.toSet
+            //(output ** new SimpleFilter(v ⇒ v.contains(".scala"))).get.toSet
           }
       }
       cached((input ** "actor.json").get.toSet).toSeq
+      //cached((input ** new ExactFilter("actor.json")).get.toSet).toSeq
     }
   }
 }

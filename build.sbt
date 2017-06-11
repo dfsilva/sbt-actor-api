@@ -7,9 +7,9 @@ organization := "im.actor"
 
 name := "sbt-actor-api"
 
-version := "0.7.36-xl-SNAPSHOT"
+version := "0.7.37-xl-SNAPSHOT"
 
-scalaVersion := "2.11.11"
+scalaVersion := "2.10.6"
 
 scalacOptions ++= Seq("-deprecation", "-feature")
 
@@ -20,8 +20,8 @@ resolvers ++= Seq(
 libraryDependencies ++= Seq(
   "com.eed3si9n" %% "treehugger" % "0.4.1",
   "com.google.protobuf" % "protobuf-java" % "3.1.0",
-  "io.spray" %% "spray-json" % "1.3.3",
-  "org.specs2" %% "specs2-core" % "3.9.1" % "test"
+  "io.spray" %% "spray-json" % "1.3.3"//,
+  //"org.specs2" %% "specs2-core" % "3.3.1" % "test"
 )
 
 scalariformSettings
