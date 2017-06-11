@@ -1,4 +1,5 @@
 import scalariform.formatter.preferences._
+import com.typesafe.sbt.SbtScalariform.ScalariformKeys
 
 sbtPlugin := true
 
@@ -6,9 +7,9 @@ organization := "im.actor"
 
 name := "sbt-actor-api"
 
-version := "0.7.35-xl-SNAPSHOT"
+version := "0.7.36-xl-SNAPSHOT"
 
-scalaVersion := "2.10.6"
+scalaVersion := "2.11.11"
 
 scalacOptions ++= Seq("-deprecation", "-feature")
 
@@ -19,8 +20,8 @@ resolvers ++= Seq(
 libraryDependencies ++= Seq(
   "com.eed3si9n" %% "treehugger" % "0.4.1",
   "com.google.protobuf" % "protobuf-java" % "3.1.0",
-  "io.spray" %% "spray-json" % "1.3.1",
-  "org.specs2" %% "specs2-core" % "2.4.15" % "test"
+  "io.spray" %% "spray-json" % "1.3.3",
+  "org.specs2" %% "specs2-core" % "3.9.1" % "test"
 )
 
 scalariformSettings
@@ -40,25 +41,3 @@ publishTo := {
 }
 
 credentials += Credentials("Sonatype Nexus Repository Manager", "nexus.diegosilva.com.br", "admin", "admin123")
-
-pomExtra := (
-  <url>http://github.com/actorapp/sbt-actor-api</url>
-  <licenses>
-    <license>
-      <name>MIT</name>
-      <url>http://www.opensource.org/licenses/MIT</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <scm>
-    <url>git@github.com:actorapp/sbt-actor-api.git</url>
-    <connection>scm:git:git@github.com:actorapp/sbt-actor-api.git</connection>
-  </scm>
-  <developers>
-    <developer>
-      <id>prettynatty</id>
-      <name>Andrey Kuznetsov</name>
-      <url>http://fear.loathing.in</url>
-    </developer>
-  </developers>
-)

@@ -15,29 +15,29 @@ object SbtActorApi extends AutoPlugin {
 
   lazy val actorapiMain = SettingKey[String]("actorapi-main", "ActorApi main class.")
 
-  lazy val settings: Seq[Setting[_]] = Seq(
-    sourceDirectory in ActorApi <<= (sourceDirectory in Compile),
-    path <<= sourceDirectory in ActorApi,
-    managedClasspath in ActorApi <<= (classpathTypes, update) map { (ct, report) ⇒
-      Classpaths.managedJars(ActorApi, ct, report)
-    },
-    outputPath <<= sourceManaged in ActorApi,
+    lazy val settings: Seq[Setting[_]] = Seq(
+      sourceDirectory in ActorApi <<= (sourceDirectory in Compile),
+      path <<= sourceDirectory in ActorApi,
+      managedClasspath in ActorApi <<= (classpathTypes, update) map { (ct, report) ⇒
+        Classpaths.managedJars(ActorApi, ct, report)
+      },
+      outputPath <<= sourceManaged in ActorApi,
 
-    actorapi <<= (
-      sourceDirectory in ActorApi,
-      sourceManaged in ActorApi,
-      managedClasspath in ActorApi,
-      javaHome,
-      streams
-    ).map(generate),
+      actorapi <<= (
+        sourceDirectory in ActorApi,
+        sourceManaged in ActorApi,
+        managedClasspath in ActorApi,
+        javaHome,
+        streams
+      ).map(generate),
 
-    actorapiClean <<= (
-      sourceManaged in ActorApi,
-      streams
-    ).map(clean),
+      actorapiClean <<= (
+        sourceManaged in ActorApi,
+        streams
+      ).map(clean),
 
-    sourceGenerators in Compile <+= actorapi
-  )
+      sourceGenerators in Compile <+= actorapi
+    )
 
   private def compiledFileDir(targetDir: File): File =
     targetDir / "main" / "scala"
