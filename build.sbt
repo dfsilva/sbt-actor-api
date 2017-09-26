@@ -7,7 +7,7 @@ organization := "im.actor"
 
 name := "sbt-actor-api"
 
-version := "0.7.33-SNAPSHOT"
+version := "0.7.34-SNAPSHOT"
 
 scalaVersion := "2.10.6"
 
@@ -18,10 +18,9 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.eed3si9n" %% "treehugger" % "0.4.1",
+  "com.eed3si9n" %% "treehugger" % "0.4.3",
   "com.google.protobuf" % "protobuf-java" % "3.1.0",
-  "io.spray" %% "spray-json" % "1.3.3"//,
-  //"org.specs2" %% "specs2-core" % "3.3.1" % "test"
+  "io.spray" %% "spray-json" % "1.3.3"
 )
 
 scalariformSettings
@@ -33,7 +32,7 @@ ScalariformKeys.preferences :=
     .setPreference(AlignSingleLineCaseStatements, true)
 
 publishTo := {
-  val nexus = "http://nexus.diegosilva.com.br:8081/nexus/"
+  val nexus = "http://nexus.diegosilva.com.br:8081/"
   if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
