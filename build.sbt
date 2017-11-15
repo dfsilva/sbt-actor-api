@@ -7,7 +7,7 @@ organization := "im.actor"
 
 name := "sbt-actor-api"
 
-version := "0.7.37-xl-SNAPSHOT"
+version := "0.7.38-xl-SNAPSHOT"
 
 scalaVersion := "2.10.6"
 
@@ -33,7 +33,7 @@ ScalariformKeys.preferences :=
     .setPreference(AlignSingleLineCaseStatements, true)
 
 publishTo := {
-  val nexus = "http://nexus.diegosilva.com.br:8081/nexus/"
+  val nexus = "http://nexus.diegosilva.com.br:8081/"
   if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
