@@ -135,7 +135,7 @@ final class Json2Tree(jsonString: String)
               name,
               Vector(
                 "scala.concurrent._",
-                // "cats.data.Xor",
+                "cats.data.Xor",
                 "com.google.protobuf.{ CodedInputStream, CodedOutputStream, ByteString }",
                 "im.actor.api.rpc.{ClientData, ContainsHeader, RpcError, RpcOk, RpcRequest, RpcResponse, Service, Update}"
               ), trees
